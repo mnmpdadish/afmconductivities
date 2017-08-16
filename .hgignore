@@ -1,0 +1,5 @@
+syntax: glob
+afmCond
+*.o
+conductivities.dat
+

@@ -1,0 +1,14 @@
+#hamiltonian parameters:
+ETA   0.1
+MU    1.5
+OMEGA 0
+t     1.0
+tp    0.0
+tpp   0.0
+M     1.0
+
+nOmega 21
+nK     401
+beta   100.0
+
+amplitudeCutoff 0.005
