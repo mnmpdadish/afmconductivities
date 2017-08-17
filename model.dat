@@ -3,12 +3,12 @@ ETA   0.1
 MU    1.5
 OMEGA 0
 t     1.0
-tp    0.0
-tpp   0.0
-M     1.0
+tp   -0.3
+tpp   0.2
+M     0.00000011
 
-nOmega 21
-nK     401
+nOmega 11
+nK     201
 beta   100.0
 
 amplitudeCutoff 0.005

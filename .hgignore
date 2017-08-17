@@ -1,5 +1,5 @@
 syntax: glob
 afmCond
 *.o
-conductivities.dat
+conductivities*.dat
 
