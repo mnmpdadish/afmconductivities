@@ -5,10 +5,10 @@ OMEGA 0
 t     1.0
 tp   -0.3
 tpp   0.2
-M     0.00000011
+M     1.5
 
 nOmega 11
-nK     201
+nK     401
 beta   100.0
 
 amplitudeCutoff 0.005
