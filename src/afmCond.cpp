@@ -4,7 +4,17 @@
 //
 
 #define _USE_MATH_DEFINES
-#include "utilities.h"
+//#include "utilities.h"
+
+#include <cassert>
+#include <cstring>
+#include <fstream>
+
+
+#include <math.h>
+#include <complex>
+#include <sys/stat.h>
+#include <stdio.h>
 
 using namespace std;
 
@@ -16,18 +26,18 @@ int main(int argc, const char * argv[]) {
     
     ///////////////////////////// hamiltonian parameters (read from file) ////////////////////////////
     //hamiltonian parameters:
-    double MU=0.0;
     double ETA=0.1;
     double t=1.0;
-    double tp=0.0;
-    double tpp=0.0;
-    double M=0.0;
+    double tp=-0.3;
+    double tpp=0.2;
+    double M=1.5;
     
     double beta=100.0;
-    int nOmega = 21;
+    int nOmega = 11;
     int nK = 401;
     double amplitudeCutoff = 0.005;
     
+    /*
     //read file para.dat:
     if (not exists("model.dat")) {printf("ERROR: couldn't find file 'model.dat'\n\n"); exit(1);}
     printf("reading parameters from model.dat\n\n") ;
@@ -47,7 +57,7 @@ int main(int argc, const char * argv[]) {
     readNumber(file,"amplitudeCutoff",amplitudeCutoff);
     
     file.close();
-    
+    */
     
     
     // precalculate the omega vector and the derivative of the Fermi Dirac vector:

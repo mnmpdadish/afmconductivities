@@ -4,6 +4,6 @@ EXEC = afmCond
 
 all: executable
 executable: src/afmCond.cpp
-	gcc $(OPTIONS) -o $(EXEC) src/afmCond.cpp -llapack -lblas -lstdc++
+	gcc $(OPTIONS) -o $(EXEC) src/afmCond.cpp -llapack -lblas -lstdc++ -lm
 
 
