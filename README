@@ -1,0 +1,58 @@
+######
+README
+######
+
+This code calculates the conductivities in a basic tight-binding model (2D square lattice).
+
+
+
+COMPILING:
+
+to compile, simply do:
+$ make
+
+
+
+DEPENDENCIES:
+
+The system only use the compiler gcc (any version should be sufficient).
+
+
+
+RUN:
+
+To run the code, gererate a "model.dat" file and type:
+$ ./afmCond
+
+The model file should contain the following parameters:
+ETA   0.1
+t     nearest neighbor hopping energy
+tp    second nearest neighbor hopping energy
+tpp   third nearest neighbor hopping energy
+M     antiferromagntic energy
+
+nMu   number of Mu to calculate
+muMin minimum Mu of the loop
+muMax maximum Mu of the loop
+
+nOmega number of frequency (omega) to calculate
+nK     number of K point to calculate (in both direction k_x and k_y)
+beta   inverse of temperature (beta = 1/T)
+
+amplitudeCutoff        value of the derivative of the Fermi Dirac cutoff used to determine the frequency cutoff
+
+
+
+RESULTS: 
+
+The code generate a "conductivities.dat" file. The different columns are the 
+different conductivities (sigma, alpha, beta) you can calculate from integration
+of the equations (see DOI:10.1103/PhysRevB.88.205109 for details). The indices
+1 and 2 refer to band 1 and 2 of the antiferromagnet. To plot the Hall number in 
+gnuplot for example, one can do:
+
+gnuplot> plot 'conductivities.dat' u 2:(($3+$4)*($3+$4)/($5+$6)/2.0) w lp
+
+
+
+

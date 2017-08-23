@@ -22,8 +22,9 @@ int main(int argc, const char * argv[]) {
     int nK = 401;
     double amplitudeCutoff = 0.005;
 
-    int nMu = 200;
+    int nMu = 20;
     double muMin=-4.0; double muMax=4.0;
+    
     
     // read parameters form file: /////////////////////////////
     FILE * file = fopen("model.dat", "rt");
@@ -65,6 +66,14 @@ int main(int argc, const char * argv[]) {
     
     
     FILE *fileOut = fopen("conductivities.dat","w");
+    
+    printf("#mu          density      sigma1_xx       sigma2_xx       sigma1_xy       sigma2_xy");
+
+    fprintf(fileOut, "#mu          density      ");
+    fprintf(fileOut, "sigma1_xx       sigma2_xx       sigma1_xy       sigma2_xy       ");
+    fprintf(fileOut, "alpha1_xx       alpha2_xx       alpha1_xy       alpha2_xy       ");
+    fprintf(fileOut, "beta1_xx        beta2_xx        beta1_xy        beta2_xy\n");
+    
     int z=0; for(z=0; z<nMu; z++)
     {
        double mu = muMin + z*(muMax-muMin)/(nMu-1);
