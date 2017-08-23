@@ -6,7 +6,10 @@ t     1.0
 tp   -0.3
 tpp   0.2
 M     1.5
+muMin -4.0
+muMax 4.0
 
+nMu   201
 nOmega 11
 nK     401
 beta   100.0

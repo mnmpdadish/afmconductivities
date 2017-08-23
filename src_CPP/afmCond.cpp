@@ -6,15 +6,7 @@
 #define _USE_MATH_DEFINES
 //#include "utilities.h"
 
-#include <cassert>
-#include <cstring>
-#include <fstream>
-
-
-#include <math.h>
-#include <complex>
-#include <sys/stat.h>
-#include <stdio.h>
+#include "utilities.h"
 
 using namespace std;
 
@@ -37,14 +29,15 @@ int main(int argc, const char * argv[]) {
     int nK = 401;
     double amplitudeCutoff = 0.005;
     
-    /*
+    int nMu = 200;
+    double muMin=-4.0; double muMax=4.0;
+    
     //read file para.dat:
     if (not exists("model.dat")) {printf("ERROR: couldn't find file 'model.dat'\n\n"); exit(1);}
     printf("reading parameters from model.dat\n\n") ;
     ifstream file;
     file.open("model.dat");
 
-    readNumber(file,"MU",MU); 
     readNumber(file,"ETA",ETA);
     readNumber(file,"t",t);
     readNumber(file,"tp",tp);
@@ -52,12 +45,16 @@ int main(int argc, const char * argv[]) {
     readNumber(file,"M",M);
     readNumber(file,"beta",beta);
     
+    readNumber(file, "muMin",muMin);
+    readNumber(file, "muMax",muMax);
+    readNumber(file, "nMu",nMu);
+    
     readNumber(file,"nOmega",nOmega);
     readNumber(file,"nK",nK);
     readNumber(file,"amplitudeCutoff",amplitudeCutoff);
     
     file.close();
-    */
+    
     
     
     // precalculate the omega vector and the derivative of the Fermi Dirac vector:
@@ -75,8 +72,6 @@ int main(int argc, const char * argv[]) {
     
     
     FILE *fileOut = fopen("conductivities.dat","w");
-    int nMu = 200;
-    double muMin=-4.0; double muMax=4.0;
     for(int z=0; z<nMu; z++)
     {
        double mu = muMin + z*(muMax-muMin)/(nMu-1);
@@ -101,7 +96,7 @@ int main(int argc, const char * argv[]) {
            double epsilon_k           = -2.*t*(coskx + cosky)- 4.*tp*coskx*cosky - 2.*tpp*(cos2kx + cos2ky) - mu;
            double depsilon_k_dkx      =  2.*t*sinkx          + 4.*tp*sinkx*cosky + 4.*tpp*sin2kx;
            double depsilon_k_dky      =  2.*t*sinky          + 4.*tp*coskx*sinky + 4.*tpp*sin2ky;
-           double ddepsilon_k_dkx_dkx =  2.*t*coskx          + 4.*tp*coskx*cosky + 8.*tpp*cos2kx;
+           //double ddepsilon_k_dkx_dkx =  2.*t*coskx          + 4.*tp*coskx*cosky + 8.*tpp*cos2kx;
            double ddepsilon_k_dky_dky =  2.*t*cosky          + 4.*tp*coskx*cosky + 8.*tpp*cos2ky;
            double ddepsilon_k_dkx_dky =                      - 4.*tp*sinkx*sinky;
 
@@ -109,7 +104,7 @@ int main(int argc, const char * argv[]) {
            double epsilon_kQ           =  2.*t*(coskx + cosky)- 4.*tp*coskx*cosky - 2.*tpp*(cos2kx + cos2ky) - mu;
            double depsilon_kQ_dkx      = -2.*t*sinkx          + 4.*tp*sinkx*cosky + 4.*tpp*sin2kx;
            double depsilon_kQ_dky      = -2.*t*sinky          + 4.*tp*coskx*sinky + 4.*tpp*sin2ky;
-           double ddepsilon_kQ_dkx_dkx = -2.*t*coskx          + 4.*tp*coskx*cosky + 8.*tpp*cos2kx;
+           //double ddepsilon_kQ_dkx_dkx = -2.*t*coskx          + 4.*tp*coskx*cosky + 8.*tpp*cos2kx;
            double ddepsilon_kQ_dky_dky = -2.*t*cosky          + 4.*tp*coskx*cosky + 8.*tpp*cos2ky;
            double ddepsilon_kQ_dkx_dky =                      - 4.*tp*sinkx*sinky;
 
@@ -117,24 +112,24 @@ int main(int argc, const char * argv[]) {
            double Sk          = 0.5*(  epsilon_k         +   epsilon_kQ);
            double dSk_dkx     = 0.5*( depsilon_k_dkx     +  depsilon_kQ_dkx);
            double dSk_dky     = 0.5*( depsilon_k_dky     +  depsilon_kQ_dky);
-           double ddSk_dkx_dkx= 0.5*(ddepsilon_k_dkx_dkx + ddepsilon_kQ_dkx_dkx);
+           //double ddSk_dkx_dkx= 0.5*(ddepsilon_k_dkx_dkx + ddepsilon_kQ_dkx_dkx);
            double ddSk_dky_dky= 0.5*(ddepsilon_k_dky_dky + ddepsilon_kQ_dky_dky);
            double ddSk_dkx_dky= 0.5*(ddepsilon_k_dkx_dky + ddepsilon_kQ_dkx_dky);
 
            double Dk          = 0.5*(  epsilon_k         -   epsilon_kQ);
            double dDk_dkx     = 0.5*( depsilon_k_dkx     -  depsilon_kQ_dkx);
            double dDk_dky     = 0.5*( depsilon_k_dky     -  depsilon_kQ_dky);
-           double ddDk_dkx_dkx= 0.5*(ddepsilon_k_dkx_dkx - ddepsilon_kQ_dkx_dkx);
+           //double ddDk_dkx_dkx= 0.5*(ddepsilon_k_dkx_dkx - ddepsilon_kQ_dkx_dkx);
            double ddDk_dky_dky= 0.5*(ddepsilon_k_dky_dky - ddepsilon_kQ_dky_dky);
            double ddDk_dkx_dky= 0.5*(ddepsilon_k_dkx_dky - ddepsilon_kQ_dkx_dky);
 
-           double Rk, dRk_dkx, dRk_dky, ddRk_dkx_dkx, ddRk_dky_dky, ddRk_dkx_dky;
+           double Rk, dRk_dkx, dRk_dky, ddRk_dky_dky, ddRk_dkx_dky;
            
            if(M<=0.00001){
                Rk = Dk; 
                dRk_dkx = dDk_dkx;
                dRk_dky = dDk_dky;
-               ddRk_dkx_dkx = ddDk_dkx_dkx; 
+               //ddRk_dkx_dkx = ddDk_dkx_dkx; 
                ddRk_dky_dky = ddDk_dky_dky;
                ddRk_dkx_dky = ddDk_dkx_dky;
            }
@@ -142,7 +137,7 @@ int main(int argc, const char * argv[]) {
                Rk          = sqrt( Dk*Dk + M*M );
                dRk_dkx     = Dk*dDk_dkx/Rk;
                dRk_dky     = Dk*dDk_dky/Rk;
-               ddRk_dkx_dkx= ((dDk_dkx*dDk_dkx + Dk*ddDk_dkx_dkx) - (Dk*Dk*dDk_dkx*dDk_dkx) / (Rk*Rk))/Rk;
+               //ddRk_dkx_dkx= ((dDk_dkx*dDk_dkx + Dk*ddDk_dkx_dkx) - (Dk*Dk*dDk_dkx*dDk_dkx) / (Rk*Rk))/Rk;
                ddRk_dky_dky= ((dDk_dky*dDk_dky + Dk*ddDk_dky_dky) - (Dk*Dk*dDk_dky*dDk_dky) / (Rk*Rk))/Rk;
                ddRk_dkx_dky= ((dDk_dkx*dDk_dky + Dk*ddDk_dkx_dky) - (Dk*Dk*dDk_dkx*dDk_dky) / (Rk*Rk))/Rk;
            }
@@ -152,14 +147,14 @@ int main(int argc, const char * argv[]) {
            double E1_k          =   Sk         +   Rk ;
            double dE1_k_dkx     =  dSk_dkx     +  dRk_dkx;
            double dE1_k_dky     =  dSk_dky     +  dRk_dky;
-           double ddE1_k_dkx_dkx= ddSk_dkx_dkx + ddRk_dkx_dkx;
+           //double ddE1_k_dkx_dkx= ddSk_dkx_dkx + ddRk_dkx_dkx;
            double ddE1_k_dky_dky= ddSk_dky_dky + ddRk_dky_dky;
            double ddE1_k_dkx_dky= ddSk_dkx_dky + ddRk_dkx_dky;
            
            double E2_k          =   Sk         -   Rk ;
            double dE2_k_dkx     =  dSk_dkx     -  dRk_dkx;
            double dE2_k_dky     =  dSk_dky     -  dRk_dky;
-           double ddE2_k_dkx_dkx= ddSk_dkx_dkx - ddRk_dkx_dkx;
+           //double ddE2_k_dkx_dkx= ddSk_dkx_dkx - ddRk_dkx_dkx;
            double ddE2_k_dky_dky= ddSk_dky_dky - ddRk_dky_dky;
            double ddE2_k_dkx_dky= ddSk_dkx_dky - ddRk_dkx_dky;
            

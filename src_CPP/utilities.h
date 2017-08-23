@@ -6,7 +6,7 @@
 #pragma once
 #include <cassert>
 //#include <cctype>
-//#include <cstdlib>
+#include <cstdlib>
 #include <cstring>
 #include <iostream>
 //#include <iosfwd>
