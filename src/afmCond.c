@@ -1,6 +1,5 @@
 //
-//  main.cpp
-//  oneBody
+//  afmCond.c
 //
 
 #include "utilities.h"
