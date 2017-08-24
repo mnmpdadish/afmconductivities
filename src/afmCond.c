@@ -73,13 +73,13 @@ int main(int argc, const char * argv[]) {
     fprintf(fileOut, "alpha1_xx       alpha2_xx       alpha1_xy       alpha2_xy       ");
     fprintf(fileOut, "beta1_xx        beta2_xx        beta1_xy        beta2_xy\n");
     
-    int z=0; for(z=0; z<nMu; z++)
+    int m=0; for(m=0; m<nMu; m++)
     {
-       double mu = muMin + z*(muMax-muMin)/(nMu-1);
+       double mu = muMin + m*(muMax-muMin)/(nMu-1);
        // initialise the sums:
        double sigma1_xx = 0., sigma2_xx = 0., sigma1_xy = 0., sigma2_xy = 0.;
        double alpha1_xx = 0., alpha2_xx = 0., alpha1_xy = 0., alpha2_xy = 0.;
-       double  beta1_xx = 0.,  beta2_xx = 0.,  beta1_xy = 0.,  beta2_xy = 0.;
+       double beta1_xx = 0.,  beta2_xx = 0.,  beta1_xy = 0.,  beta2_xy = 0.;
        double density = 0.;
        
        int i=0; for(i=0; i<nK; i++)
