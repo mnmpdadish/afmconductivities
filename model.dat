@@ -11,7 +11,7 @@ muMax 4.0
 
 nMu   201
 nOmega 11
-nK     401
+nK     201
 beta   100.0
 
 amplitudeCutoff 0.005
