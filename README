@@ -15,7 +15,7 @@ $ make
 
 DEPENDENCIES:
 
-The system only use the compiler gcc (any version should be sufficient).
+The makefile only need the compiler gcc (any version should be sufficient).
 
 
 
@@ -24,7 +24,9 @@ RUN:
 To run the code, gererate a "model.dat" file and type:
 $ ./afmCond
 
-The model file should contain the following parameters:
+An example of a model.dat file is contained in the "example" directory.
+The "model.dat" file should contain the following parameters:
+
 ETA   Lorentzian broadening of the spectral weight
 t     nearest neighbor hopping energy
 tp    second nearest neighbor hopping energy
@@ -40,6 +42,7 @@ nK     number of K point to calculate (in both direction k_x and k_y)
 beta   inverse of temperature (beta = 1/T)
 
 amplitudeCutoff        value of the derivative of the Fermi Dirac cutoff used to determine the frequency cutoff
+
 
 
 
