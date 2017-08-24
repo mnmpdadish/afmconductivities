@@ -51,7 +51,7 @@ of the equations (see DOI:10.1103/PhysRevB.88.205109 for details). The indices
 1 and 2 refer to band 1 and 2 of the antiferromagnet. To plot the Hall number in 
 gnuplot for example, one can do:
 
-gnuplot> plot 'conductivities.dat' u 2:(($3+$4)*($3+$4)/($5+$6)/2.0) w lp
+gnuplot> plot 'conductivities.dat' u (1-$2):(($3+$4)*($3+$4)/($5+$6)) w lp
 
 
 
