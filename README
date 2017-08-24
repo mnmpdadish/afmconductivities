@@ -55,4 +55,9 @@ gnuplot> plot 'conductivities.dat' u 2:(($3+$4)*($3+$4)/($5+$6)) w lp, x, x-1, x
 
 
 
+EXAMPLE:
+
+An example of results are shown in the "example" directory. Running the program with
+the "model.dat" in this directory should reproduce the "conductivities.dat" file.
+
 
