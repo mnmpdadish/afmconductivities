@@ -42,13 +42,19 @@ nMu   number of Mu to calculate
 muMin minimum Mu of the loop
 muMax maximum Mu of the loop
 
-nOmega number of frequency (omega) to calculate
-nK     number of K point to calculate (in both direction k_x and k_y)
+nOmega number of frequency (omega) to calculate for the integral
+nK     number of K point to calculate (in both direction k_x and k_y) for the integral
 beta   inverse of temperature (beta = 1/T)
 
 amplitudeCutoff        value of the derivative of the Fermi Dirac cutoff used to determine the frequency cutoff
 
-
+##########################
+WARGING: this program is very basic. It essentially calculate a multidimensional integral with a basic grid. 
+nK and nOmega specify how fine the sampling is. It is important to use the correct nK, nOmega to 
+not integrate noise. As a rule of thumbs, a smaller ETA requires more nK points. nOmega should be
+to obtain the same precision. Once you get a solution from the program, changes these parameter by a 
+huge factor to test if the integral converged. 
+##########################
 
 
 RESULTS: 
