@@ -1,5 +1,5 @@
 ######
-README
+#README
 ######
 
 This code calculates the conductivities in a basic tight-binding model (2D square lattice).
@@ -48,7 +48,8 @@ amplitudeCutoff        value of the derivative of the Fermi Dirac cutoff used to
 
 RESULTS: 
 
-The code generate a "conductivities.dat" file. The different columns are the 
+The code generate a "conductivities.dat" file. The first 2 columns give the 
+chemical potential "mu" and the density "n". The rest of the columns are the 
 different conductivities (sigma, alpha, beta) you can calculate from integration
 of the equations (see DOI:10.1103/PhysRevB.88.205109 for details). The indices
 1 and 2 refer to band 1 and 2 of the antiferromagnet. To plot the Hall number in 

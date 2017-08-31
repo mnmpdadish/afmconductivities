@@ -213,7 +213,12 @@ int main(int argc, const char * argv[]) {
        fprintf(fileOut,"\n");
     }
     fclose(fileOut);
-    
-    printf(" afmCond over.\n");
+ 
+#define KNRM  "\x1B[0m"
+#define KRED  "\x1B[31m"
+#define KGRN  "\x1B[32m"
+#define KBOLD "\033[1m"
+   
+    printf("\n\x1B[32m\033[1mafmCond over.\x1B[0m\n\n");
     return 0;
 }
