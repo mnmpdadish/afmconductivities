@@ -1,0 +1,20 @@
+######
+#README
+######
+
+USAGE:
+
+Running the program with the "model.dat" present in this directory should reproduce 
+the "conductivities.dat" file in the "results" subdirectory. Type:
+
+$ ./afmCond
+
+in this directory to obtain your "conductivities.dat".
+
+
+PLOTTING:
+
+To plot the Hall number as a function of hole density relative to half filling 
+in gnuplot for example, one can do:
+
+gnuplot> plot 'conductivities.dat' u 2:(($3+$4)*($3+$4)/($5+$6)) w lp, x, x-1, x+1
