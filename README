@@ -2,8 +2,7 @@
 #README
 ######
 
-Written by:  Maxime Charlebois
-Reviewed by: Maxime Charlebois (17 october 2017)
+Main programmer:  Maxime Charlebois
 
 
 #######
@@ -85,4 +84,11 @@ EXAMPLE:
 An example of results are shown in the "example" directory. See the README in this
 directory. 
 
+
+
+########
+Reviewer: Maxime Charlebois
+Date: 19 september 2017
+Tested on Linux Ubuntu LTS 12.04 and 16.04
+quantique-udes v1.0 compliant
 
