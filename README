@@ -10,9 +10,10 @@ This code calculates the conductivities in a basic tight-binding model (2D squar
 
 
 ############
-DOWNLOADING:
+MAIN REPOSITORY:
 
-In command line on a bash termianl (represented here with the "$" sign), type:
+To get the most recent version of the source cod on this project,
+in command line on a bash termianl (represented here with the "$" sign), type:
 $ hg clone https://bitbucket.org/mnmpdadish/afmconductivities
 
 
@@ -64,7 +65,6 @@ to obtain the same precision. Once you get a solution from the program, changes 
 huge factor to test if the integral converged. 
 
 
-
 ########
 RESULTS: 
 
@@ -88,7 +88,7 @@ directory.
 
 ########
 Reviewer: Maxime Charlebois
-Date: 19 september 2017
+Date: 8 october 2017
 Tested on Linux Ubuntu LTS 12.04 and 16.04
-quantique-udes v1.0 compliant
+quantique-udes v1.1 compliant
 

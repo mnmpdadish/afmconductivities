@@ -4,4 +4,5 @@ afmCond
 gmon.out
 tmp
 conductivities*.dat
+afmconductivities.tar.gz
 

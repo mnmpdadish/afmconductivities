@@ -18,3 +18,4 @@ To plot the Hall number as a function of hole density relative to half filling
 in gnuplot for example, one can do:
 
 gnuplot> plot 'conductivities.dat' u 2:(($3+$4)*($3+$4)/($5+$6)) w lp, x, x-1, x+1
+
