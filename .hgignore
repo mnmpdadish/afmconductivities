@@ -3,6 +3,6 @@ afmCond
 *.o
 gmon.out
 tmp
-conductivities*.dat
+./conductivities.dat
 afmconductivities.tar.gz
 
