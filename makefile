@@ -1,4 +1,4 @@
-OPTIONS = -O2 -Wall
+OPTIONS = -O2 -Wall -ffast-math
 EXEC = afmCond
 
 all: executable
