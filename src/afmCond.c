@@ -73,6 +73,26 @@ int main(int argc, const char * argv[]) {
     fprintf(fileOut, "alpha1_xx       alpha2_xx       alpha1_xy       alpha2_xy       ");
     fprintf(fileOut, "beta1_xx        beta2_xx        beta1_xy        beta2_xy\n");
     
+    
+    double sinkx[nK]; double sinky[nK]; double sin2ky[nK]; double sin2kx[nK]; 
+    double coskx[nK]; double cosky[nK]; double cos2ky[nK]; double cos2kx[nK]; 
+    
+    int i=0; for(i=0; i<nK; i++)
+       {
+          int j=0; for(j=0; j<nK; j++)
+          {
+              ///////////////////////////// calculate eigenenergies and its derivatives ////////////////////////////
+              double kx = M_PI*(-1.0 + i*2.0/nK);
+              double ky = M_PI*(-1.0 + j*2.0/nK);
+
+              //precalculate some trigo stuff:
+              sinkx[i] = sin(kx); sinky[j] = sin(ky); sin2ky[j] = sin(2.*ky); sin2kx[i] = sin(2.*kx); 
+              coskx[i] = cos(kx); cosky[j] = cos(ky); cos2ky[j] = cos(2.*ky); cos2kx[i] = cos(2.*kx);
+          }
+       }
+    
+    
+    
     int m=0; for(m=0; m<nMu; m++)
     {
        double mu = muMin + m*(muMax-muMin)/(nMu-1);
@@ -87,28 +107,27 @@ int main(int argc, const char * argv[]) {
           int j=0; for(j=0; j<nK; j++)
           {
               ///////////////////////////// calculate eigenenergies and its derivatives ////////////////////////////
-              double kx = M_PI*(-1.0 + i*2.0/nK);
-              double ky = M_PI*(-1.0 + j*2.0/nK);
+              //double kx = M_PI*(-1.0 + i*2.0/nK);
+              //double ky = M_PI*(-1.0 + j*2.0/nK);
 
               //precalculate some trigo stuff:
-              double sinkx = sin(kx), sinky = sin(ky), sin2ky = sin(2.*ky), sin2kx = sin(2.*kx); 
-              double coskx = cos(kx), cosky = cos(ky), cos2ky = cos(2.*ky), cos2kx = cos(2.*kx);
+              //double sinkx = sin(kx), sinky = sin(ky), sin2ky = sin(2.*ky), sin2kx = sin(2.*kx); 
+              //double coskx = cos(kx), cosky = cos(ky), cos2ky = cos(2.*ky), cos2kx = cos(2.*kx);
               
               // dispersion relation (and its derivatives):
-              double epsilon_k           = -2.*t*(coskx + cosky)- 4.*tp*coskx*cosky - 2.*tpp*(cos2kx + cos2ky) - mu;
-              double depsilon_k_dkx      =  2.*t*sinkx          + 4.*tp*sinkx*cosky + 4.*tpp*sin2kx;
-              double depsilon_k_dky      =  2.*t*sinky          + 4.*tp*coskx*sinky + 4.*tpp*sin2ky;
-              //double ddepsilon_k_dkx_dkx =  2.*t*coskx          + 4.*tp*coskx*cosky + 8.*tpp*cos2kx;
-              double ddepsilon_k_dky_dky =  2.*t*cosky          + 4.*tp*coskx*cosky + 8.*tpp*cos2ky;
-              double ddepsilon_k_dkx_dky =                      - 4.*tp*sinkx*sinky;
+              double epsilon_k           = -2.*t*(coskx[i] + cosky[j])- 4.*tp*coskx[i]*cosky[j] - 2.*tpp*(cos2kx[i] + cos2ky[j]) - mu;
+              double depsilon_k_dkx      =  2.*t*sinkx[i]             + 4.*tp*sinkx[i]*cosky[j] + 4.*tpp*sin2kx[i];
+              double depsilon_k_dky      =  2.*t*sinky[j]             + 4.*tp*coskx[i]*sinky[j] + 4.*tpp*sin2ky[j];
+              //double ddepsilon_k_dkx_dkx =  2.*t*coskx[i]           + 4.*tp*coskx[i]*cosky[j] + 8.*tpp*cos2kx[i];
+              double ddepsilon_k_dky_dky =  2.*t*cosky[j]             + 4.*tp*coskx[i]*cosky[j] + 8.*tpp*cos2ky[j];
+              double ddepsilon_k_dkx_dky =                            - 4.*tp*sinkx[i]*sinky[j];
 
-              // dispersion relation (and its derivatives):
-              double epsilon_kQ           =  2.*t*(coskx + cosky)- 4.*tp*coskx*cosky - 2.*tpp*(cos2kx + cos2ky) - mu;
-              double depsilon_kQ_dkx      = -2.*t*sinkx          + 4.*tp*sinkx*cosky + 4.*tpp*sin2kx;
-              double depsilon_kQ_dky      = -2.*t*sinky          + 4.*tp*coskx*sinky + 4.*tpp*sin2ky;
-              //double ddepsilon_kQ_dkx_dkx = -2.*t*coskx          + 4.*tp*coskx*cosky + 8.*tpp*cos2kx;
-              double ddepsilon_kQ_dky_dky = -2.*t*cosky          + 4.*tp*coskx*cosky + 8.*tpp*cos2ky;
-              double ddepsilon_kQ_dkx_dky =                      - 4.*tp*sinkx*sinky;
+              double epsilon_kQ           =  2.*t*(coskx[i] + cosky[j])- 4.*tp*coskx[i]*cosky[j] - 2.*tpp*(cos2kx[i] + cos2ky[j]) - mu;
+              double depsilon_kQ_dkx      = -2.*t*sinkx[i]             + 4.*tp*sinkx[i]*cosky[j] + 4.*tpp*sin2kx[i];
+              double depsilon_kQ_dky      = -2.*t*sinky[j]             + 4.*tp*coskx[i]*sinky[j] + 4.*tpp*sin2ky[j];
+              //double ddepsilon_k_dkx_dkx = -2.*t*coskx[i]           + 4.*tp*coskx[i]*cosky[j] + 8.*tpp*cos2kx[i];
+              double ddepsilon_kQ_dky_dky = -2.*t*cosky[j]             + 4.*tp*coskx[i]*cosky[j] + 8.*tpp*cos2ky[j];
+              double ddepsilon_kQ_dkx_dky =                            - 4.*tp*sinkx[i]*sinky[j];
 
               //precalculate sum, diff and radical:
               double Sk          = 0.5*(  epsilon_k         +   epsilon_kQ);
