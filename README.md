@@ -7,30 +7,29 @@ Main programmer:  Maxime Charlebois
 This code calculates the conductivities in a basic tight-binding model (2D square lattice).
 
 
-### MAIN REPOSITORY: ###
+## MAIN REPOSITORY: ##
 
 To get the most recent version of the source code on this project,
 in command line on a bash terminal (represented here with the "$" sign), type:
+
 $ hg clone https://bitbucket.org/mnmpdadish/afmconductivities
 
 
-###########
-COMPILING:
+## COMPILING: ##
 
 to compile, go in the "afmconductivities" directory (where the "makefile" is) and type:
+
 $ make
 
 
-#############
-DEPENDENCIES:
+## DEPENDENCIES: ##
 
 To compile, the system only need the compiler gcc.
 Any version should be sufficient.
 Tested with gcc-4.8.
 
 
-####
-RUN:
+## RUN: ##
 
 To run the code, gererate a "model.dat" file and type:
 $ ./afmCond
@@ -54,16 +53,15 @@ beta   inverse of temperature (beta = 1/T)
 
 amplitudeCutoff        value of the derivative of the Fermi Dirac cutoff used to determine the frequency cutoff
 
-##########################
-WARNING: this program is very basic. It essentially calculate a multidimensional integral with a basic grid. 
+## WARNING: ##  
+this program is very basic. It essentially calculate a multidimensional integral with a basic grid. 
 nK and nOmega specify how fine the sampling is. It is important to use the correct nK, nOmega to 
 not integrate noise. As a rule of thumbs, a smaller ETA requires more nK points. nOmega should be
 to obtain the same precision. Once you get a solution from the program, changes these parameter by a 
 huge factor to test if the integral converged. 
 
 
-########
-RESULTS: 
+## RESULTS: ##
 
 The code generate a "conductivities.dat" file. The first 2 columns give the 
 chemical potential "mu" and the density "n". The rest of the columns are the 
@@ -75,15 +73,14 @@ the Hall number in gnuplot for example, one can do:
 gnuplot> plot 'conductivities.dat' u 2:(($3+$4)*($3+$4)/($5+$6)) w lp, x, x-1, x+1
 
 
-########
-EXAMPLE:
+## EXAMPLE: ##
 
 An example of results are shown in the "example" directory. See the README in this
 directory. 
 
 
 
-########
+## SEAL ##
 Reviewer: Maxime Charlebois
 Date: 15th november 2017
 Tested on Linux Ubuntu LTS 12.04 and 16.04
