@@ -1,16 +1,13 @@
-######
-#README
-######
+##########
+# README #
+##########
 
 Main programmer:  Maxime Charlebois
 
-
-#######
 This code calculates the conductivities in a basic tight-binding model (2D square lattice).
 
 
-############
-MAIN REPOSITORY:
+### MAIN REPOSITORY: ###
 
 To get the most recent version of the source code on this project,
 in command line on a bash terminal (represented here with the "$" sign), type:
@@ -88,7 +85,8 @@ directory.
 
 ########
 Reviewer: Maxime Charlebois
-Date: 8 october 2017
+Date: 15th november 2017
 Tested on Linux Ubuntu LTS 12.04 and 16.04
-quantique-udes v1.1 compliant
+www.physique.usherbrooke.ca/source_code 
+code submission procedure v1.2 compliant
 
