@@ -81,9 +81,9 @@ directory.
 
 
 ## SEAL ##
-Reviewer: Maxime Charlebois
-Date: 15th november 2017
-Tested on Linux Ubuntu LTS 12.04 and 16.04
+Reviewer: Maxime Charlebois 
+Date: 15th november 2017 
+Tested on Linux Ubuntu LTS 12.04 and 16.04 
 www.physique.usherbrooke.ca/source_code 
-code submission procedure v1.2 compliant
+code submission procedure v1.2 compliant 
 
