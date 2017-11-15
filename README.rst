@@ -12,8 +12,8 @@ This code calculates the conductivities in a basic tight-binding model (2D squar
 ############
 MAIN REPOSITORY:
 
-To get the most recent version of the source cod on this project,
-in command line on a bash termianl (represented here with the "$" sign), type:
+To get the most recent version of the source code on this project,
+in command line on a bash terminal (represented here with the "$" sign), type:
 $ hg clone https://bitbucket.org/mnmpdadish/afmconductivities
 
 
@@ -58,7 +58,7 @@ beta   inverse of temperature (beta = 1/T)
 amplitudeCutoff        value of the derivative of the Fermi Dirac cutoff used to determine the frequency cutoff
 
 ##########################
-WARGING: this program is very basic. It essentially calculate a multidimensional integral with a basic grid. 
+WARNING: this program is very basic. It essentially calculate a multidimensional integral with a basic grid. 
 nK and nOmega specify how fine the sampling is. It is important to use the correct nK, nOmega to 
 not integrate noise. As a rule of thumbs, a smaller ETA requires more nK points. nOmega should be
 to obtain the same precision. Once you get a solution from the program, changes these parameter by a 
