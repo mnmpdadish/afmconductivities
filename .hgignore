@@ -1,5 +1,6 @@
 syntax: glob
 afmCond
+afmHall
 *.o
 gmon.out
 tmp
