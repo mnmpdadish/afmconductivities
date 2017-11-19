@@ -325,7 +325,7 @@ int main(int argc, const char * argv[]) {
        double f0 = 1.0/nK/nK;
        double c1 = 1.0;
        double c2 = 1.0;
-       double c3 = 1./ETA;
+       double c3 = M_PI/ETA;
 
        printf("\n% 4.8f % 4.8f  % 4.8e % 4.8e % 4.8e", mu, 1.0-f0*density,  f0*sigma_xx*c1, f0*sigma_xy*c2, f0*sigma_xx_bubble*c1); 
        fprintf(fileOut,"% 4.8f % 4.8f  ", mu, 1.0-f0*density);
