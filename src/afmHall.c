@@ -182,10 +182,10 @@ int main(int argc, const char * argv[]) {
               double ddxi_k_dkx_dky =  0.0;
               
               //defining multiple 2x2 matrices:
-              double lambda_x[4], lambda_y[4], lambda_yy[4], lambda_xy[4], A[4], t_matrix[4], to_invert[4];
+              double lambda_x[4], lambda_y[4], lambda_yy[4], lambda_xy[4], A[4], t_plus_self[4], to_invert[4];
               
-              t_matrix[0] = zeta_k + M;   t_matrix[1] = xi_k;
-              t_matrix[2] = xi_k;         t_matrix[3] = zeta_k - M;
+              t_plus_self[0] = zeta_k + M;   t_plus_self[1] = xi_k;
+              t_plus_self[2] = xi_k;         t_plus_self[3] = zeta_k - M;
               
               lambda_x[0] = dzeta_k_dkx;  lambda_x[1] = dxi_k_dkx;
               lambda_x[2] = dxi_k_dkx;    lambda_x[3] = dzeta_k_dkx;
@@ -206,7 +206,7 @@ int main(int argc, const char * argv[]) {
               //dummy1[3]+=mu; // +omega=0;
               
               // dummy2 = (omega-t)^2 +eta^2
-              two_matrix2x2Multiplication(to_invert, t_matrix, t_matrix);
+              two_matrix2x2Multiplication(to_invert, t_plus_self, t_plus_self);
               to_invert[0]+=ETA*ETA;
               to_invert[3]+=ETA*ETA;
               
@@ -216,24 +216,30 @@ int main(int argc, const char * argv[]) {
               //bref,...
               
               //Calculating Reza's 2x2 matrices and stuff:
-              double Ax[4], Ay[4], Axy[4], Ayy[4];
+              double Ax[4], Ay[4], Axy[4], Ayy[4], tAx[4], tAy[4];
               two_matrix2x2Multiplication(Ax,  A, lambda_x);
               two_matrix2x2Multiplication(Ay,  A, lambda_y);
               two_matrix2x2Multiplication(Ayy, A, lambda_yy);
               two_matrix2x2Multiplication(Axy, A, lambda_xy);
+              two_matrix2x2Multiplication(tAx, t_plus_self, Ax);
+              two_matrix2x2Multiplication(tAy, t_plus_self, Ay);
               
-              double bubble[4], tri1[4], tri2[4], rect1[4], rect2[4];
+              double bubble[4], tri1[4], tri2[4], rect1[4], rect2[4], rect3[4], rect4[4];
               two_matrix2x2Multiplication(bubble, Ax, Ax);
               three_matrix2x2Multiplication(tri1, Ax, Ay, Axy);
               three_matrix2x2Multiplication(tri2, Ax, Ax, Ayy);
-              four_matrix2x2Multiplication(rect1, Ax, Ay, Ax, Ay);
-              four_matrix2x2Multiplication(rect2, Ax, Ax, Ay, Ay);
+              four_matrix2x2Multiplication(rect1, tAx, Ay, Ax, Ay);
+              four_matrix2x2Multiplication(rect2, tAy, Ax, Ax, Ay);
+              four_matrix2x2Multiplication(rect3, tAx, Ay, Ay, Ax);
+              four_matrix2x2Multiplication(rect4, tAy, Ax, Ay, Ax);
               
               sigma_xx_bubble+= bubble[0]+ bubble[3]; //trace
               sigma_xy_tri1  += tri1[0]  + tri1[3]; //trace
               sigma_xy_tri2  += tri2[0]  + tri2[3]; //trace
-              sigma_xy_rect1 += M*rect1[0] - M*rect1[3]; //not exactly trace, still trying to understand (but it works)...
-              sigma_xy_rect2 += M*rect2[0] - M*rect2[3]; //same
+              sigma_xy_rect1 += rect1[0] + rect1[3] + rect4[0] + rect4[3] - (rect2[0] + rect2[3] + rect3[0] + rect3[3]);
+              sigma_xy_rect2 += M*rect1[0] - M*rect1[3] - M*rect2[0] + M*rect2[3];
+              //sigma_xy_rect1 += M*rect1[0] - M*rect1[3]; //not exactly trace, still trying to understand (but it works)...
+              //sigma_xy_rect2 += M*rect2[0] - M*rect2[3]; //same
               
               
               

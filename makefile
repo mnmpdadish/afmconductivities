@@ -1,7 +1,7 @@
 OPTIONS = -O2 -Wall -ffast-math
 EXEC = afmCond
 
-all: executable
+all: executable hall
 executable:
 	gcc $(OPTIONS) -o $(EXEC) src/afmCond.c -lm  
 
