@@ -151,7 +151,7 @@ int main(int argc, const char * argv[]) {
        double mu = muMin + m*(muMax-muMin)/(nMu-1);
        // initialise the sums:
        double sigma_xx = 0., sigma_xy = 0., sigma_xx_bubble = 0.; 
-       double sigma_xy_tri1 = 0.,   sigma_xy_tri2 = 0., sigma_xy_rect1 = 0., sigma_xy_rect2 = 0.;
+       double sigma_xy_tri = 0., sigma_xy_rect = 0.;
        double density = 0.;
        
        for(i=0; i<nK; i++)
@@ -234,10 +234,9 @@ int main(int argc, const char * argv[]) {
               four_matrix2x2Multiplication(rect4, tAy, Ax, Ay, Ax);
               
               sigma_xx_bubble+= bubble[0]+ bubble[3]; //trace
-              sigma_xy_tri1  += tri1[0]  + tri1[3]; //trace
-              sigma_xy_tri2  += tri2[0]  + tri2[3]; //trace
-              sigma_xy_rect1 += rect1[0] + rect1[3] + rect4[0] + rect4[3] - (rect2[0] + rect2[3] + rect3[0] + rect3[3]);
-              sigma_xy_rect2 += M*rect1[0] - M*rect1[3] - M*rect2[0] + M*rect2[3];
+              sigma_xy_tri  += tri1[0]  + tri1[3] - (tri2[0]  + tri2[3]); //trace
+              sigma_xy_rect += (rect2[0] + rect2[3] + rect3[0] + rect3[3]) - (rect1[0] + rect1[3] + rect4[0] + rect4[3]);
+              //sigma_xy_rect2 += M*rect1[0] - M*rect1[3] - M*rect2[0] + M*rect2[3];
               //sigma_xy_rect1 += M*rect1[0] - M*rect1[3]; //not exactly trace, still trying to understand (but it works)...
               //sigma_xy_rect2 += M*rect2[0] - M*rect2[3]; //same
               
@@ -337,7 +336,7 @@ int main(int argc, const char * argv[]) {
        fprintf(fileOut,"% 4.8f % 4.8f  ", mu, 1.0-f0*density);
        fprintf(fileOut,"% 4.8e % 4.8e ", f0*sigma_xx*c1, f0*sigma_xy*c2);
        fprintf(fileOut,"% 4.8e ", f0*sigma_xx_bubble*c1);
-       fprintf(fileOut,"% 4.8e % 4.8e % 4.8e % 4.8e ", f0*sigma_xy_tri1*c2, f0*sigma_xy_tri2*c2, f0*sigma_xy_rect1*c3, f0*sigma_xy_rect2*c3); //6,7,8,9,10
+       fprintf(fileOut,"% 4.8e % 4.8e ", f0*sigma_xy_tri*c2, f0*sigma_xy_rect*c3); //6,7
        fprintf(fileOut,"\n");
     }
     fclose(fileOut);
